@@ -1,7 +1,7 @@
 require "colorize"
 
 class Tile
-  attr_reader :value
+  attr_accessor :value
   attr_writer :turned
 
   def initialize(value)
@@ -14,6 +14,6 @@ class Tile
   end
 
   def to_s
-    @turned ? value : " "
+    value == "B" ? value : " "
   end
 end
