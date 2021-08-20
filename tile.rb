@@ -18,6 +18,6 @@ class Tile
   end
 
   def to_s
-    @turned ? value : " "
+    @turned ? value.colorize(self.color) : " "
   end
 end
