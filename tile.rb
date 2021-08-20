@@ -9,11 +9,15 @@ class Tile
     @turned = false
   end
 
+  def turned?
+    @turned
+  end
+
   def color
     value == "B" ? :red : :green
   end
 
   def to_s
-    value == "B" ? value : " "
+    @turned ? value : " "
   end
 end

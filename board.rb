@@ -28,8 +28,31 @@ class Board
   end
 
   def [](pos)
+    p pos
     x,y = pos
     grid[x][y]
+  end
+
+  def get_pos
+    puts "Select a squre you would like to reveal (ex. 2,1):"
+    pos = gets.chomp.split(",").map { |num| num.to_i }
+    while !self.valid_tile?(pos)
+      puts "Select a squre you would like to reveal (ex. 2,1):"
+      pos = gets.chomp.split(",").map { |num| num.to_i }
+    end
+    x,y = pos
+    grid[x][y].turned = true
+    p grid[x][y]
+  end
+
+  def valid_tile?(pos)
+    x, y = pos
+    if !(x.to_s =~ /\A[-+]?\d*\.?\d+\z/) || !(y.to_s =~ /\A[-+]?\d*\.?\d+\z/)
+      return false
+    end
+    return false if x > 8 || y > 8 || x < 0 || y < 0
+    return false if grid[x][y].turned?
+    return true
   end
 
   def render
@@ -39,6 +62,12 @@ class Board
       row.each { |tile| print " #{tile.to_s}"}
       print "\n"
     end
+  end
+
+  def play_round
+    self.render
+    self.get_pos
+    self.render
   end
 
   private
