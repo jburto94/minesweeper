@@ -1,3 +1,4 @@
+require "colorize"
 require_relative "board"
 
 class MineSweeper
@@ -45,9 +46,12 @@ class MineSweeper
   def terminate?
     if board.bomb_shown?
       board.show_full_board
+      puts "YOU HAVE LOST THE GAME".colorize(:red)
+      return true
     end
     return false if board.any_hidden_squares?
     board.show_full_board
+    puts "CONGRATULATIONS! YOU HAVE WON THE GAME!".colorize(:green)
     true
   end
 
@@ -62,7 +66,6 @@ class MineSweeper
     end
 
     board.render
-    p "END"
   end
 
   private

@@ -127,7 +127,10 @@ class Board
 
   def show_full_board
     grid.each do |row|
-      row.each { |tile| tile.turned = true }
+      row.each do |tile| 
+        tile.turned = true
+        tile.flagged = false
+      end
     end
   end
 
